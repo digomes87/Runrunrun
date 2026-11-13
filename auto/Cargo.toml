@@ -1,0 +1,9 @@
+[package]
+name = "auto"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+anyhow = "1.0.104"
+rand = "0.10.3"
+rand_distr = "0.6.0"
