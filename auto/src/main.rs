@@ -7,16 +7,16 @@ use rand_distr::Distribution;
 use std::fs;
 
 fn main() {
-    variaveis();
-    constantes();
-    leitura_file().unwrap_or_else(|e| {
-        eprintln!("Erro: {e}");
+    variables();
+    constants();
+    read_file().unwrap_or_else(|e| {
+        eprintln!("Error: {e}");
         std::process::exit(1);
     });
-    formatando_strings();
-    numeros_aleatorios();
-    structs_aleatorias();
-    gerando_senha();
+    formatting_strings();
+    random_numbers();
+    random_structs();
+    generating_password();
     generate_password_user_defined();
     vector_of_integer();
     vector_sort();
@@ -29,7 +29,7 @@ fn vector_of_integer() {
     assert_eq!(vec, vec![1, 2, 5, 10, 15]);
 }
 
-// ==================== Variáveis ====================
+// ==================== Variables ====================
 
 //
 // ==================== Vector Sort ====================
@@ -39,66 +39,66 @@ fn vector_sort() {
     assert_eq!(vec, vec![1.1, 1.123, 1.15, 2.0, 5.5]);
 }
 
-fn variaveis() {
+fn variables() {
     let mut num_10: i32 = 10;
     let num_y = 9;
-    let ponto_flutuante: f64 = 3.1415333;
+    let floating_point: f64 = 3.1415333;
 
-    println!("Var: {}, var {}, e var {}", num_10, num_y, ponto_flutuante);
+    println!("Var: {}, var {}, and var {}", num_10, num_y, floating_point);
 
-    // mutabilidade: só num_10 pode ser reatribuído
+    // mutability: only num_10 can be reassigned
     num_10 = 2;
 
-    // shadowing: num_y vira uma NOVA variável do tipo &str
+    // shadowing: num_y becomes a NEW variable of type &str
     let num_y = "ABC";
 
-    let mut nome_aluno: &str = "Antonia";
-    println!("Nome da aluna {nome_aluno}");
-    nome_aluno = "Fagundes";
-    println!("Novo aluno {nome_aluno}");
+    let mut student_name: &str = "Antonia";
+    println!("Student name: {student_name}");
+    student_name = "Fagundes";
+    println!("New student: {student_name}");
 
-    println!("Agora o num 10 é: {} e num_y: {}", num_10, num_y);
+    println!("Now num 10 is: {} and num_y: {}", num_10, num_y);
 
-    // shadowing dentro de um escopo: só existe entre as chaves
+    // shadowing inside a scope: only exists between the braces
     {
-        let num_10 = "numero 10";
-        println!("dentro de um escopo {num_10}");
+        let num_10 = "number 10";
+        println!("inside a scope {num_10}");
     }
 }
 
-// ==================== Constantes ====================
+// ==================== Constants ====================
 
-fn constantes() {
-    const TENTATIVAS: i32 = 4;
-    println!("Quantidades: {TENTATIVAS}");
+fn constants() {
+    const ATTEMPTS: i32 = 4;
+    println!("Amount: {ATTEMPTS}");
 }
 
-// ==================== Leitura de arquivos ====================
+// ==================== File reading ====================
 
-fn leitura_file() -> Result<()> {
-    let conteudo = fs::read_to_string("src/file.txt").context("Falha ao ler src/file.txt")?;
-    println!("{conteudo}");
+fn read_file() -> Result<()> {
+    let contents = fs::read_to_string("src/file.txt").context("Failed to read src/file.txt")?;
+    println!("{contents}");
     Ok(())
 }
 
-// ==================== Formatação de strings ====================
+// ==================== String formatting ====================
 
-fn formatando_strings() {
-    let introducao = "Uma introducao de novo ???";
-    let curso = "AWS";
-    println!("Curso {curso}, {introducao} pode ser uma boa");
+fn formatting_strings() {
+    let intro = "An introduction again ???";
+    let course = "AWS";
+    println!("Course {course}, {intro} could be a good one");
 }
 
-// ==================== Números aleatórios ====================
+// ==================== Random numbers ====================
 
-fn numeros_aleatorios() {
-    // aleatório "puro"
+fn random_numbers() {
+    // "pure" random
     let mut rng = rand::rng();
     let random_number: u32 = rng.random();
     println!("Random Number: {random_number}");
 
-    // com distribuição (dado de 6 faces até tirar 6)
-    let die = Uniform::new_inclusive(1, 6).expect("Falha ao criar distribuição");
+    // with a distribution (6-sided die until we roll a 6)
+    let die = Uniform::new_inclusive(1, 6).expect("Failed to create distribution");
     loop {
         let throw = die.sample(&mut rng);
         println!("Roll the die: {throw}");
@@ -108,7 +108,7 @@ fn numeros_aleatorios() {
     }
 }
 
-// ==================== Structs com random custom ====================
+// ==================== Structs with custom random ====================
 
 #[derive(Debug)]
 struct Point {
@@ -125,17 +125,17 @@ impl Point {
     }
 }
 
-fn structs_aleatorias() {
+fn random_structs() {
     let mut rng = rand::rng();
     let rand_tuple = rng.random::<(i32, bool, f64)>();
     let rand_point = Point::random(&mut rng);
-    println!("Random tupla: {:?}", rand_tuple);
+    println!("Random tuple: {:?}", rand_tuple);
     println!("Random Point: {:?}", rand_point);
 }
 
-// ==================== Gerador de senha ====================
+// ==================== Password generator ====================
 
-fn gerando_senha() {
+fn generating_password() {
     let password = generate_password();
     println!("Your password {password}");
 }
@@ -148,7 +148,7 @@ fn generate_password() -> String {
         .map(|_| rng.sample(Alphanumeric) as char)
         .collect()
 }
-// ==================== Gerador de senha em formato Definido ====================
+// ==================== Password generator with a defined charset ====================
 fn generate_password_user_defined() {
     const CHARSET: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZ\
                         abcdefghijklmnopqrstuvwxyz\
