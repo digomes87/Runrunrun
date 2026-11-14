@@ -7,3 +7,4 @@ edition = "2024"
 anyhow = "1.0.104"
 rand = "0.10.3"
 rand_distr = "0.6.0"
+tokio = { version = "1.54.1", features = ["full"] }
